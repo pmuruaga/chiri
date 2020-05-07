@@ -32,3 +32,7 @@ ControlBingosChiri/App_Data/aspnet-ControlBingosChiri-20171017162957_log.ldf
 
 # End of https://www.gitignore.io/api/windows
 
+/.vs/ControlBingosChiri/v15/Server/sqlite3/storage.ide-wal
+/.vs/ControlBingosChiri/v15/Server/sqlite3/storage.ide-shm
+/.vs/ControlBingosChiri/v15/Server/sqlite3/storage.ide
+/.vs/ControlBingosChiri/v15/Server/sqlite3/db.lock

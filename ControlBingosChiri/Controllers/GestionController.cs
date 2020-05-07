@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.IO;
 using ControlBingosChiri.Models;
 using log4net;
+using System.Configuration;
 
 namespace ControlBingosChiri.Controllers
 {
@@ -33,8 +34,7 @@ namespace ControlBingosChiri.Controllers
             if (file != null && file.ContentLength > 0)
             {
                 var fileName = Path.GetFileName(file.FileName);
-
-                //var path = Path.Combine(Server.MapPath("~/App_Data"), fileName);
+                
                 var path = Path.Combine( Server.MapPath("~/App_Data/uploads")
                 , string.Concat( Path.GetFileNameWithoutExtension(fileName)
                                , DateTime.Now.ToString("_yyyy_MM_dd_HH_mm_ss")
@@ -98,8 +98,7 @@ namespace ControlBingosChiri.Controllers
                     log.Debug("Limpiando Datos viejos");
                     ctx.Database.ExecuteSqlCommand("Delete From [NumerosSorteos] Where DATEADD(month, 2, FechaCreacion) < getdate()");
                     ctx.SaveChanges();
-                }
-                //  Where DATEADD(month, 2, FechaCreacion) < getdate()
+                }                
 
                 using (var ctx2 = new ControlBingosChiriDb()) // assuming IDisposable
                 {
@@ -184,25 +183,7 @@ namespace ControlBingosChiri.Controllers
                     }
                     log.Debug("Grabando");
                     ctx2.SaveChanges();
-                }
-                
-                
-                //string SQLTableName = "Control";
-
-                ////create a reader for the datatable
-                //DataTableReader reader = dt.CreateDataReader();
-                //myConnection.Open();   ///this is my connection to the sql server
-                //SqlBulkCopy sqlcpy = new SqlBulkCopy(myConnection);
-                //sqlcpy.DestinationTableName = SQLTableName;  //copy the datatable to the sql table
-
-                //sqlcpy.WriteToServer(dt);
-
-                //myConnection.Close();
-
-                //reader.Close();
-
-                //MessageBox.Show("Congratulations, your .dbf file has been transferred.", "Success");
-
+                }                              
             }
             
             catch (Exception ex)
@@ -214,11 +195,6 @@ namespace ControlBingosChiri.Controllers
                     ViewBag.Message = "Error";
                 }                
                 return;
-                //LogEntry(ex.ToString());
-                //MessageBox.Show("Sorry, your .dbf file transfer failed.  " +
-                //"Please make sure that you entered a valid SQL table name.  " +
-                //"It must contain the correct column names and lengths that correspond to the .dbf.", "Failure");
-                //this.Refresh();
             }
 
         }
@@ -260,7 +236,34 @@ namespace ControlBingosChiri.Controllers
                 }
             }
             return View();           
-        }        
+        }
+
+        [HttpPost]
+        public ActionResult UploadFiles()
+        {
+            bool isSuccess = false;
+            string serverMessage = string.Empty;
+            var fileOne = Request.Files[0] as HttpPostedFileBase;
+            string uploadPath = ConfigurationManager.AppSettings["UPLOAD_PATH"].ToString();
+            string newFileOne = Path.Combine(uploadPath, fileOne.FileName);
+
+            string imagePath = ConfigurationManager.AppSettings["UPLOAD_URL"].ToString();
+            imagePath = Path.Combine(imagePath, fileOne.FileName);
+
+            fileOne.SaveAs(newFileOne);
+
+            if (System.IO.File.Exists(newFileOne))
+            {
+                isSuccess = true;
+                serverMessage = imagePath;
+            }
+            else
+            {
+                isSuccess = false;
+                serverMessage = "Fallo al subir el archivo. Intente nuevamente.";
+            }
+            return Json(new { IsSucccess = isSuccess, ServerMessage = serverMessage }, JsonRequestBehavior.AllowGet);
+        }
 
     }
 }
