@@ -1,0 +1,46 @@
+﻿/*Custom Button*/
+.btn-chiri {
+            color: #ffffff;
+            background-color: #E4097F;
+            border-color: #690228;
+        }
+
+            .btn-chiri:hover,
+            .btn-chiri:focus,
+            .btn-chiri:active,
+            .btn-chiri.active,
+            .open .dropdown-toggle.btn-chiri {
+                color: #ffffff;
+                background-color: #7A2469;
+                border-color: #690228;
+            }
+
+            .btn-chiri:active,
+            .btn-chiri.active,
+            .open .dropdown-toggle.btn-chiri {
+                background-image: none;
+            }
+
+            .btn-chiri.disabled,
+            .btn-chiri[disabled],
+            fieldset[disabled] .btn-chiri,
+            .btn-chiri.disabled:hover,
+            .btn-chiri[disabled]:hover,
+            fieldset[disabled] .btn-chiri:hover,
+            .btn-chiri.disabled:focus,
+            .btn-chiri[disabled]:focus,
+            fieldset[disabled] .btn-chiri:focus,
+            .btn-chiri.disabled:active,
+            .btn-chiri[disabled]:active,
+            fieldset[disabled] .btn-chiri:active,
+            .btn-chiri.disabled.active,
+            .btn-chiri[disabled].active,
+            fieldset[disabled] .btn-chiri.active {
+                background-color: #E4097F;
+                border-color: #690228;
+            }
+
+            .btn-chiri .badge {
+                color: #E4097F;
+                background-color: #ffffff;
+            }

@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Resultado de Carga de Archivo</h2>
+@{
+    if (@ViewBag.Message == "Ok")
+    {
+      <p>El archivo fue procesado!</p>
+    }else{
+       <p>Fallo al subir el archivo</p>
+    }
+}
+
+@Html.ActionLink("Volver al Inicio", "Index", "Home") | @Html.ActionLink("Volver al Gestion", "Index") | @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+        }

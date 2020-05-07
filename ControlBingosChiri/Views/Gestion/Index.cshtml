@@ -1,0 +1,67 @@
+﻿@{
+	ViewBag.Title = "La Chiri - Gestión";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Gestión de Controles</h2>
+
+@using (Html.BeginForm("Upload", "Gestion", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+	<div class="container">
+		<div class="row">
+			<div class='col-sm-6 col-md-4'>
+				<div class="form-group">
+					<div class='input-group date' id='datetimepicker1'>
+						<input type='text' id="fecha_sorteo" name="fecha_sorteo" class="form-control" placeholder="Seleccione la fecha del sorteo" />
+						<span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class='col-sm-6 col-md-4'>
+				<div class="form-group">
+					<input type="file" name="file" accept=".csv" />
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class='col-sm-6 col-md-6'>
+				<div class="form-group">
+					<input type="submit" value="Cargar" class="btn btn-chiri col-sm-6 col-md-2 offset-md-1" />
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+<br />
+<br />
+<br />
+
+@Html.ActionLink("Volver al Inicio", "Index", "Home") | @Html.ActionLink("Editar Popup", "Popup", "Gestion") | @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+{
+	@Html.AntiForgeryToken()
+	<a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+}
+
+
+<script>
+
+	//$(function () {
+	//    $('.datepicker').datepicker({
+	//        format: 'dd/mm/yyyy',
+	//        startDate: '-3d'
+	//    });
+	//});
+	$(function () {
+		$('#datetimepicker1').datetimepicker({
+			format: 'DD/MM/YYYY'
+		});
+	});
+
+</script>
+

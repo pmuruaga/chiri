@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "La Chiri - Inicio";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@*@ViewBag.Title*@Gracias por jugar a La Chiri</h1>
+                <br />
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <p>
+                Aquí encontrará las instrucciones para verificar si su cartón está participando en el sorteo.
+            </p>
+        </div>
+    </section>
+}
+<h3>Para validar su cartón haga lo siguiente:</h3>
+<ol class="round">
+    <li class="one">
+        <h5>Tenga su cartón a mano y ubique el número</h5>
+        Con el número de cartón localizado procederá a revisar si su cartón esta participando en el último sorteo!
+    </li>
+
+    <li class="two">
+        <h5>Ingrese el número de cartón en el siguiente cuadro de texto</h5>
+        En el cuadro de texto a continuación ingrese el número de cartón.
+    </li>
+
+    <li class="three">
+        <h5>Presione el botón verificar</h5>
+        Presiones el botón verificar y automáticamente el sistema revisará en la base de datos si su cartón fue rendido correctamente y esta participando en el último sorteo.
+    </li>
+</ol>
+
+<div>
+    <i>Los datos que se encuentran cargados pertenecen al sorteo del día: </i>
+    <label id="fecha_sorteo" class="label_fecha_sorteo">...</label>
+    <br />
+    <i>Los datos del próximo se encontrarán disponibles el día del sorteo.</i>
+    <br />
+    <br />
+    @using (Html.BeginForm("Verificar", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {   
+        <div class="row">
+            <input type="text" name="busqueda" id="busqueda" placeholder="Ingrese el Número de Cartón Aquí..." class="number col-sm-10 offset-sm-1 col-md-4" />            
+            <input type="submit" value="Verificar..." class="btn btn-chiri col-sm-6 col-md-2 offset-md-1" />
+        </div>            
+    }
+
+</div>
+
+
+@section scripts {
+    <script>
+        $(function () {
+            getProximoSorteo();
+
+            function getProximoSorteo() {
+                $.get("/Home/GetProximoSorteo",
+                    { },
+                    function (response) {
+                        $("#fecha_sorteo").html(response.DateTime);
+                    }
+                 );
+            }
+        });
+    </script>
+}

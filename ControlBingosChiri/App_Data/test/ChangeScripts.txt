@@ -1,0 +1,4 @@
+﻿--Agrego columnas de FechaSorteo y FechaCreacion
+ALTER TABLE dbo.TablaPruebas ADD
+	FechaCreacion datetime NULL,
+	FechaSorteo datetime NULL

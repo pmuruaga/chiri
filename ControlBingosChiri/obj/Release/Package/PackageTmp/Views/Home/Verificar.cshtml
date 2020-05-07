@@ -1,0 +1,21 @@
+﻿@model ControlBingosChiri.Models.VerificarViewModel
+
+@{
+    ViewBag.Title = "La Chiri - Verificar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Verificación</h1>
+@{if(@Model.Existe){
+      <h2>El Numero <span class="juega">@Model.NumeroVerificado Juega </span> en este Sorteo</h2>
+}else if(@Model.NumeroVerificado == -500){
+    <h2> Numero ingresado no es valido </h2>
+}else{
+    <h2>El Numero <span class="nojuega">@Model.NumeroVerificado NO Juega </span> en este Sorteo</h2>
+  }
+}
+<br />
+<br />
+<br />
+<br />
+@Html.ActionLink("Volver al Inicio", "Index")
