@@ -30,5 +30,8 @@ $RECYCLE.BIN/
 ControlBingosChiri/App_Data/aspnet-ControlBingosChiri-20171017162957.mdf
 ControlBingosChiri/App_Data/aspnet-ControlBingosChiri-20171017162957_log.ldf
 
+# Carpeta generada al publicar (publish.ps1)
+Publicacion/
+
 # End of https://www.gitignore.io/api/windows
 

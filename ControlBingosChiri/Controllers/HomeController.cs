@@ -43,14 +43,27 @@ namespace ControlBingosChiri.Controllers
             return View();
         }
 
-        public ActionResult Verificar(string busqueda)
+        [HttpGet]
+        public ActionResult Verificar(string id)
+        {
+            return VerificarCarton(id);
+        }
+
+        [HttpPost]
+        public ActionResult Verificar(string busqueda, string id)
+        {
+            var numeroCarton = !String.IsNullOrEmpty(busqueda) ? busqueda : id;
+            return VerificarCarton(numeroCarton);
+        }
+
+        private ActionResult VerificarCarton(string numeroCarton)
         {
             int numerov = 0;
             try
             {
-                if (!String.IsNullOrEmpty(busqueda))
+                if (!String.IsNullOrEmpty(numeroCarton))
                 {
-                    numerov = Convert.ToInt32(busqueda);
+                    numerov = Convert.ToInt32(numeroCarton);
                 }
             }
             catch (Exception e) {
@@ -65,14 +78,7 @@ namespace ControlBingosChiri.Controllers
             VerificarViewModel vm = new VerificarViewModel();
             vm.Existe = numeroJuega;
             vm.NumeroVerificado = numerov;
-            //if (numeroJuega)
-            //{
             return View(vm);
-            //}
-            //else
-            //{
-            //    return View();
-            //}
         }
 
         [HttpGet]
